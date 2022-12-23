@@ -51,7 +51,14 @@
 <div class="column is-one-third">
 
     <div class="block">
-        <a href="{% url 'dwitter:profile_list' %}">
+        <a href="{% url 'dwitter:dashboard' %}">
+            <button class="button is-dark is-outlined is-fullwidth">
+                My Dashboard
+            </button>
+        </a>    
+    </div>
+    <div class="block">
+            <a href="{% url 'dwitter:profile_list' %}">
             <button class="button is-dark is-outlined is-fullwidth">
                 All Profiles
             </button>
