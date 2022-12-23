@@ -3,20 +3,19 @@
 {% block content %}
 
 <div class="column">
-    {% for followed in user.profile.follows.all %}
-        {% for dweet in followed.user.dweets.all %}
-            <div class="box">
-                {{ dweet.body }}
-                <span class="is-small has-text-grey-light">
-                    ({{ dweet.created_at }} by {{ dweet.user.username }}
-                </span>
-            </div>
-        {% endfor %}
+    {% for dweet in dweets %}
+    <div class="box">
+        {{dweet.body}}
+        <span class="is-small has-text-grey-light">
+            ({{ dweet.created_at }} by {{ dweet.user.username }}
+        </span>
+    </div>
     {% endfor %}
 </div>
 
 <div class="column is-one-third">
     <div class="block">
+        {% if user.is_authenticated %}
         <a href="{% url 'dwitter:profile_list' %} ">
             <button class="button is-dark is-outlined is-fullwidth">
                 All Profiles
@@ -31,6 +30,21 @@
         </a>
     </div>
     <div class="block">
+        <a href="{% url 'logout' %} ">
+            <button class="button is-success is-light is-outlined is-fullwidth">
+                Logout
+            </button>
+        </a>
+        {% else %}
+        <a href="{% url 'login' %} ">
+            <button class="button is-success is-light is-outlined is-fullwidth">
+                Login
+            </button>
+        </a>
+        {% endif %}
+    </div>
+    <div class="block">
+        {% if user.is_authenticated %}
         <div class="block">
             <h2 class="title is-2">Add a Dweet</p>
         </div>
@@ -43,6 +57,7 @@
         </button>
     </form>
 </div>
+        {% endif %}
 </div>
 </div>
 
